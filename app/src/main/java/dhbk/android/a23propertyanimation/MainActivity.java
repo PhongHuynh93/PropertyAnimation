@@ -8,26 +8,37 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    CheckBox mCheckBox;
+    @InjectView(R.id.checkbox)
+    CheckBox mCheckbox;
+    @InjectView(R.id.alphaButton)
+    Button alphaButton;
+    @InjectView(R.id.translateButton)
+    Button translateButton;
+    @InjectView(R.id.rotateButton)
+    Button rotateButton;
+    @InjectView(R.id.scaleButton)
+    Button scaleButton;
+    @InjectView(R.id.setButton)
+    Button setButton;
+    @InjectView(R.id.container)
+    LinearLayout mContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mCheckBox = (CheckBox) findViewById(R.id.checkbox);
-        final Button alphaButton = (Button) findViewById(R.id.alphaButton);
-        final Button translateButton = (Button) findViewById(R.id.translateButton);
-        final Button rotateButton = (Button) findViewById(R.id.rotateButton);
-        final Button scaleButton = (Button) findViewById(R.id.scaleButton);
-        final Button setButton = (Button) findViewById(R.id.setButton);
+        ButterKnife.inject(this);
 
         // Fade the button out and back in
         ObjectAnimator alphaAnimation = ObjectAnimator.ofFloat(alphaButton,
@@ -74,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 // If the button is checked, load the animation from the given resource
                 // id instead of using the passed-in animation parameter. See the xml files
                 // for the details on those animations.
-                if (mCheckBox.isChecked()) {
+                if (mCheckbox.isChecked()) {
                     Animator anim = AnimatorInflater.loadAnimator(MainActivity.this, animationID);
                     anim.setTarget(v);
                     anim.start();
@@ -85,25 +96,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    @OnClick(R.id.checkbox)
+    public void onClick() {
     }
 }

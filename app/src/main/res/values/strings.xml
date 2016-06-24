@@ -14,7 +14,7 @@
 -->
 <resources>
 
-    <string name="app_name">PropertyAnimations</string>
+    <string name="app_name">23 PropertyAnimations</string>
     <string name="title_activity_property_animations">PropertyAnimations</string>
     <string name="use_animation_resources">Use Animation Resources</string>
     <string name="alpha">Alpha</string>
